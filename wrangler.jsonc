@@ -1,0 +1,48 @@
+{
+  // ==========================================================================
+  // Snowflake MCP Server - Wrangler Configuration
+  // ==========================================================================
+  //
+  // MULTI-TENANT ARCHITECTURE:
+  // This server supports multiple tenants. Credentials are passed via request
+  // headers, NOT stored as wrangler secrets. This allows a single deployment
+  // to serve multiple customers.
+  //
+  // Required Headers:
+  // - X-Snowflake-Account: Account identifier (e.g., xy12345.us-east-1)
+  // - X-Snowflake-Token: JWT token for authentication
+  //
+  // Optional Headers:
+  // - X-Snowflake-Warehouse: Default warehouse for queries
+  // - X-Snowflake-Database: Default database
+  // - X-Snowflake-Schema: Default schema
+  // - X-Snowflake-Role: Role to use for the session
+  // ==========================================================================
+
+  "name": "primrose-mcp-snowflake",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-12-01",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // ==========================================================================
+  // Environment Variables (server-wide configuration, not per-tenant)
+  // ==========================================================================
+  "vars": {
+    "CHARACTER_LIMIT": "50000",
+    "DEFAULT_PAGE_SIZE": "20",
+    "MAX_PAGE_SIZE": "100",
+    "DEFAULT_TIMEOUT": "60"
+  },
+
+  // ==========================================================================
+  // Development
+  // ==========================================================================
+  "dev": {
+    "port": 8787,
+    "local_protocol": "http"
+  },
+
+  "observability": {
+    "enabled": true
+  }
+}
